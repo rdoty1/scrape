@@ -8,6 +8,11 @@ var cheerio = require("cheerio");
 // Initialize Express
 var app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// Make public a static folder
+app.use(express.static("public"));
+
 //linking up mongodb
 var databaseUrl = "newsdb";
 var collections = ["news"];
@@ -32,6 +37,7 @@ app.get("/all", function(req, res) {
         }
         // If there are no errors, send the data to the browser as json
         else {
+
             res.json(found);
         }
     });
@@ -40,7 +46,7 @@ app.get("/all", function(req, res) {
 
 var counter = 0;
 
-app.get("/scrape", function(req, res) {
+app.get("/getnews", function(req, res) {
     // Make a request via axios for the news section of `ycombinator`
     axios.get("https://news.ycombinator.com/front").then(function(response) {
         // Load the html body from axios into cheerio
@@ -55,7 +61,8 @@ app.get("/scrape", function(req, res) {
             if (title && link) {
                 // Insert the data in the scrapedData db
                 db.news.insert({
-                        title: title,
+                        Headline: title,
+
                         link: link
                     },
                     function(err, inserted) {

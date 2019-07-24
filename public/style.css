@@ -1,0 +1,13 @@
+.jumbotron.jumbotron-fluid {
+    margin: 0;
+}
+
+.results {
+    color: white;
+    background-color: black;
+}
+
+.data-entry {
+    border: solid;
+    border-color: red;
+}
