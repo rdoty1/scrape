@@ -32,6 +32,7 @@ app.get("/all", function(req, res) {
         }
         // If there are no errors, send the data to the browser as json
         else {
+
             res.json(found);
         }
     });
@@ -55,7 +56,8 @@ app.get("/scrape", function(req, res) {
             if (title && link) {
                 // Insert the data in the scrapedData db
                 db.news.insert({
-                        title: title,
+                        Headline: title,
+
                         link: link
                     },
                     function(err, inserted) {
